@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.bigkoo.pickerview.configure.PickerOptions;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.bigkoo.pickerview.listener.OnFourOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -26,6 +27,13 @@ public class OptionsPickerBuilder {
         mPickerOptions = new PickerOptions(PickerOptions.TYPE_PICKER_OPTIONS);
         mPickerOptions.context = context;
         mPickerOptions.optionsSelectListener = listener;
+    }
+
+    //Required
+    public OptionsPickerBuilder(Context context, OnFourOptionsSelectListener listener) {
+        mPickerOptions = new PickerOptions(PickerOptions.TYPE_PICKER_OPTIONS);
+        mPickerOptions.context = context;
+        mPickerOptions.fourOptionsSelectListener = listener;
     }
 
     //Option
@@ -193,6 +201,14 @@ public class OptionsPickerBuilder {
         return this;
     }
 
+    public OptionsPickerBuilder setCyclic(boolean cyclic1, boolean cyclic2, boolean cyclic3, boolean cyclic4) {
+        mPickerOptions.cyclic1 = cyclic1;
+        mPickerOptions.cyclic2 = cyclic2;
+        mPickerOptions.cyclic3 = cyclic3;
+        mPickerOptions.cyclic4 = cyclic4;
+        return this;
+    }
+
     public OptionsPickerBuilder setSelectOptions(int option1) {
         mPickerOptions.option1 = option1;
         return this;
@@ -211,10 +227,26 @@ public class OptionsPickerBuilder {
         return this;
     }
 
+    public OptionsPickerBuilder setSelectOptions(int option1, int option2, int option3, int option4) {
+        mPickerOptions.option1 = option1;
+        mPickerOptions.option2 = option2;
+        mPickerOptions.option3 = option3;
+        mPickerOptions.option4 = option4;
+        return this;
+    }
+
     public OptionsPickerBuilder setTextXOffset(int xoffset_one, int xoffset_two, int xoffset_three) {
         mPickerOptions.x_offset_one = xoffset_one;
         mPickerOptions.x_offset_two = xoffset_two;
         mPickerOptions.x_offset_three = xoffset_three;
+        return this;
+    }
+
+    public OptionsPickerBuilder setTextXOffset(int xoffset_one, int xoffset_two, int xoffset_three, int xoffset_four) {
+        mPickerOptions.x_offset_one = xoffset_one;
+        mPickerOptions.x_offset_two = xoffset_two;
+        mPickerOptions.x_offset_three = xoffset_three;
+        mPickerOptions.x_offset_four = xoffset_four;
         return this;
     }
 
