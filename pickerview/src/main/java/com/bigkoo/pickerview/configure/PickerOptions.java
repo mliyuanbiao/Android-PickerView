@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.bigkoo.pickerview.R;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.bigkoo.pickerview.listener.OnFourOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener;
@@ -33,6 +34,7 @@ public class PickerOptions {
     public static final int TYPE_PICKER_TIME = 2;
 
     public OnOptionsSelectListener optionsSelectListener;
+    public OnFourOptionsSelectListener fourOptionsSelectListener;
     public OnTimeSelectListener timeSelectListener;
     public View.OnClickListener cancelListener;
 
@@ -43,12 +45,13 @@ public class PickerOptions {
 
     //options picker
     public String label1, label2, label3;//单位字符
-    public int option1, option2, option3;//默认选中项
-    public int x_offset_one, x_offset_two, x_offset_three;//x轴偏移量
+    public int option1, option2, option3, option4;//默认选中项
+    public int x_offset_one, x_offset_two, x_offset_three, x_offset_four;//x轴偏移量
 
     public boolean cyclic1 = false;//是否循环，默认否
     public boolean cyclic2 = false;
     public boolean cyclic3 = false;
+    public boolean cyclic4 = false;
 
     public boolean isRestoreItem = false; //切换时，还原第一项
 
