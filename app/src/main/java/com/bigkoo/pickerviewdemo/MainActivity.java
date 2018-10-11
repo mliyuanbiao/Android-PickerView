@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initCustomTimePicker();
         initLunarPicker();
         initOptionPicker();
-        initCustomOptionPicker();
+//        initCustomOptionPicker();
         initNoLinkOptionsPicker();
 
         Button btn_Time = (Button) findViewById(R.id.btn_Time);
