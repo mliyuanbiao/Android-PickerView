@@ -110,6 +110,17 @@ public class OptionsPickerBuilder {
         return this;
     }
 
+    public OptionsPickerBuilder setDecorView(ViewGroup decorView, boolean isShowTopBar) {
+        mPickerOptions.decorView = decorView;
+        mPickerOptions.isShowTopBar = isShowTopBar;
+        return this;
+    }
+
+    public OptionsPickerBuilder setShowTopBar(boolean showTopBar) {
+        mPickerOptions.isShowTopBar = showTopBar;
+        return this;
+    }
+
     public OptionsPickerBuilder setLayoutRes(int res, CustomListener listener) {
         mPickerOptions.layoutRes = res;
         mPickerOptions.customListener = listener;
