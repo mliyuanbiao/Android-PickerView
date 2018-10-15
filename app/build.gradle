@@ -29,7 +29,7 @@ dependencies {
     implementation project(':pickerview')
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation 'com.google.code.gson:gson:2.8.5'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()

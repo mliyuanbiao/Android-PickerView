@@ -44,7 +44,7 @@ public class PickerOptions {
 
 
     //options picker
-    public String label1, label2, label3;//单位字符
+    public String label1, label2, label3, label4;//单位字符
     public int option1, option2, option3, option4;//默认选中项
     public int x_offset_one, x_offset_two, x_offset_three, x_offset_four;//x轴偏移量
 
