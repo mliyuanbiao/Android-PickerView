@@ -89,7 +89,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-    implementation 'com.github.mliyuanbiao.Android-PickerView:pickerview:f4d3eb3826'
+    implementation 'com.github.mliyuanbiao:Android-PickerView:master-SNAPSHOT'
 }
 ```
 
