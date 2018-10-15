@@ -3,11 +3,10 @@
 
 [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg)](https://android-arsenal.com/api?level=9) 
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Download](https://api.bintray.com/packages/contrarywind/maven/Android-PickerView/images/download.svg) ](https://bintray.com/contrarywind/maven/Android-PickerView/_latestVersion)
+[![](https://jitpack.io/v/mliyuanbiao/Android-PickerView.svg)](https://jitpack.io/#mliyuanbiao/Android-PickerView)
 
 [![GitHub stars](https://img.shields.io/github/stars/Bigkoo/Android-PickerView.svg?style=social)](https://github.com/Bigkoo/Android-PickerView/stargazers) [![GitHub forks](https://img.shields.io/github/forks/Bigkoo/Android-PickerView.svg?style=social)](https://github.com/Bigkoo/Android-PickerView/network) [![GitHub watchers](https://img.shields.io/github/watchers/Bigkoo/Android-PickerView.svg?style=social)](https://github.com/Bigkoo/Android-PickerView/watchers)
 
-### [English Document](https://github.com/Bigkoo/Android-PickerView/blob/master/README-en.md)
 
 ### 注意事项、详请使用方式、更新日志等，请查看 [Wiki文档](https://github.com/Bigkoo/Android-PickerView/wiki)
 **Wiki文档，Wiki文档，Wiki文档 !~ 重要的事情说三遍**
@@ -77,19 +76,21 @@
 #### Android-PickerView 库使用示例：
 
 #### 1.添加Jcenter仓库 Gradle依赖：
-```java
-compile 'com.contrarywind:Android-PickerView:4.1.6'
+Step 1. Add the JitPack repository to your build file
+Add it in your root build.gradle at the end of repositories:
+```groovy
+allprojects {
+    repositories {
+        //...
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
-或者
-
-#### Maven
-```
-<dependency>
-<groupId>com.contrarywind</groupId>
-<artifactId>Android-PickerView</artifactId>
-<version>4.1.2</version>
-<type>pom</type>
-</dependency>
+Step 2. Add the dependency
+```groovy
+dependencies {
+    implementation 'com.github.mliyuanbiao.Android-PickerView:pickerview:f4d3eb3826'
+}
 ```
 
 #### 2.在项目中添加如下代码：
@@ -97,11 +98,11 @@ compile 'com.contrarywind:Android-PickerView:4.1.6'
 ```java
 //时间选择器
 TimePickerView pvTime = new TimePickerBuilder(MainActivity.this, new OnTimeSelectListener() {
-                           @Override
-                           public void onTimeSelect(Date date, View v) {
-                               Toast.makeText(MainActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
-                           }
-                       }).build();
+           @Override
+           public void onTimeSelect(Date date, View v) {
+               Toast.makeText(MainActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
+           }
+       }).build();
 ```
 
 ```java
@@ -254,7 +255,7 @@ pvOptions = new  OptionsPickerBuilder(this, new OptionsPickerView.OnOptionsSelec
 
 #### 6.若只需要WheelView基础控件自行扩展实现逻辑，可直接添加基础控件库，Gradle 依赖：
  
-```java
+```groovy
 compile 'com.contrarywind:wheelview:4.0.8'
 ```
 
