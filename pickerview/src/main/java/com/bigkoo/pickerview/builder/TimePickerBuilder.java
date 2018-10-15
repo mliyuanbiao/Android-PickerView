@@ -88,6 +88,17 @@ public class TimePickerBuilder {
         return this;
     }
 
+    public TimePickerBuilder setDecorView(ViewGroup decorView, boolean showTopBar) {
+        mPickerOptions.decorView = decorView;
+        mPickerOptions.isShowTopBar = showTopBar;
+        return this;
+    }
+
+    public TimePickerBuilder setShowTopBar(boolean showTopBar) {
+        mPickerOptions.isShowTopBar = showTopBar;
+        return this;
+    }
+
     public TimePickerBuilder setBgColor(int bgColorWheel) {
         mPickerOptions.bgColorWheel = bgColorWheel;
         return this;

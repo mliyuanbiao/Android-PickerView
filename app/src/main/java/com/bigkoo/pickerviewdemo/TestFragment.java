@@ -92,7 +92,7 @@ public class TestFragment extends Fragment implements View.OnClickListener {
                 .setContentTextSize(20)
                 .setDate(selectedDate)
                 .setRangDate(startDate, selectedDate)
-                .setDecorView(mFrameLayout)//非dialog模式下,设置ViewGroup, pickerView将会添加到这个ViewGroup中
+                .setDecorView(mFrameLayout, false)//非dialog模式下,设置ViewGroup, pickerView将会添加到这个ViewGroup中
                 .setBackgroundId(0x00000000)
                 .setOutSideCancelable(false)
                 .build();

@@ -83,6 +83,7 @@ public class PickerOptions {
     //******* 公有字段  ******//
     public int layoutRes;
     public ViewGroup decorView;
+    public boolean isShowTopBar = true;
     public int textGravity = Gravity.CENTER;
     public Context context;
 
