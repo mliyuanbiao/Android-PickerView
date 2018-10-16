@@ -83,6 +83,7 @@ public class WheelOptions<T> {
             wv_option3.setAdapter(new ArrayWheelAdapter(mOptions3Items.get(0).get(0)));// 设置显示数据
         }
         wv_option3.setCurrentItem(wv_option3.getCurrentItem());
+        // 选项4
         if (mOptions4Items != null) {
             wv_option4.setAdapter(new ArrayWheelAdapter(mOptions4Items.get(0).get(0).get(0)));
         }
@@ -116,8 +117,12 @@ public class WheelOptions<T> {
             public void onItemSelected(int index) {
                 int opt2Select = 0;
                 if (mOptions2Items == null) {//只有1级联动数据
+                    int option1CurrentItem = wv_option1.getCurrentItem();
                     if (optionsSelectChangeListener != null) {
-                        optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), 0, 0);
+                        optionsSelectChangeListener.onOptionsSelectChanged(option1CurrentItem, -1, -1);
+                    }
+                    if (fourOptionsSelectChangeListener != null) {
+                        fourOptionsSelectChangeListener.onOptionsSelectChanged(option1CurrentItem, -1, -1, -1);
                     }
                 } else {
                     if (!isRestoreItem) {
@@ -132,7 +137,7 @@ public class WheelOptions<T> {
                         wheelListener_option2.onItemSelected(opt2Select);
                     } else {//只有2级联动数据，滑动第1项回调
                         if (fourOptionsSelectChangeListener != null) {
-                            fourOptionsSelectChangeListener.onOptionsSelectChanged(index, opt2Select, 0, 0);
+                            fourOptionsSelectChangeListener.onOptionsSelectChanged(index, opt2Select, -1, -1);
                         }
                     }
                 }
@@ -158,12 +163,18 @@ public class WheelOptions<T> {
                     wv_option3.setCurrentItem(opt3);
 
                     //3级联动数据实时回调
+                    if (optionsSelectChangeListener != null) {
+                        optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, opt3);
+                    }
                     if (fourOptionsSelectChangeListener != null) {
-                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, opt3, 0);
+                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, opt3, -1);
                     }
                 } else {//只有2级联动数据，滑动第2项回调
+                    if (optionsSelectChangeListener != null) {
+                        optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, -1);
+                    }
                     if (fourOptionsSelectChangeListener != null) {
-                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, 0, 0);
+                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, -1, -1);
                     }
                 }
             }
@@ -248,6 +259,7 @@ public class WheelOptions<T> {
         } else {
             wv_option3.setVisibility(View.VISIBLE);
         }
+        wv_option4.setVisibility(View.GONE);
 
         // 联动监听器
         wheelListener_option1 = new OnItemSelectedListener() {
