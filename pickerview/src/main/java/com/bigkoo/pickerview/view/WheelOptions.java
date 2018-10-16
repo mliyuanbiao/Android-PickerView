@@ -83,6 +83,7 @@ public class WheelOptions<T> {
             wv_option3.setAdapter(new ArrayWheelAdapter(mOptions3Items.get(0).get(0)));// 设置显示数据
         }
         wv_option3.setCurrentItem(wv_option3.getCurrentItem());
+        // 选项4
         if (mOptions4Items != null) {
             wv_option4.setAdapter(new ArrayWheelAdapter(mOptions4Items.get(0).get(0).get(0)));
         }
@@ -116,8 +117,12 @@ public class WheelOptions<T> {
             public void onItemSelected(int index) {
                 int opt2Select = 0;
                 if (mOptions2Items == null) {//只有1级联动数据
+                    int option1CurrentItem = wv_option1.getCurrentItem();
                     if (optionsSelectChangeListener != null) {
-                        optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), 0, 0);
+                        optionsSelectChangeListener.onOptionsSelectChanged(option1CurrentItem, -1, -1);
+                    }
+                    if (fourOptionsSelectChangeListener != null) {
+                        fourOptionsSelectChangeListener.onOptionsSelectChanged(option1CurrentItem, -1, -1, -1);
                     }
                 } else {
                     if (!isRestoreItem) {
@@ -132,7 +137,7 @@ public class WheelOptions<T> {
                         wheelListener_option2.onItemSelected(opt2Select);
                     } else {//只有2级联动数据，滑动第1项回调
                         if (fourOptionsSelectChangeListener != null) {
-                            fourOptionsSelectChangeListener.onOptionsSelectChanged(index, opt2Select, 0, 0);
+                            fourOptionsSelectChangeListener.onOptionsSelectChanged(index, opt2Select, -1, -1);
                         }
                     }
                 }
@@ -158,12 +163,18 @@ public class WheelOptions<T> {
                     wv_option3.setCurrentItem(opt3);
 
                     //3级联动数据实时回调
+                    if (optionsSelectChangeListener != null) {
+                        optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, opt3);
+                    }
                     if (fourOptionsSelectChangeListener != null) {
-                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, opt3, 0);
+                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, opt3, -1);
                     }
                 } else {//只有2级联动数据，滑动第2项回调
+                    if (optionsSelectChangeListener != null) {
+                        optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, -1);
+                    }
                     if (fourOptionsSelectChangeListener != null) {
-                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, 0, 0);
+                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, -1, -1);
                     }
                 }
             }
@@ -248,6 +259,7 @@ public class WheelOptions<T> {
         } else {
             wv_option3.setVisibility(View.VISIBLE);
         }
+        wv_option4.setVisibility(View.GONE);
 
         // 联动监听器
         wheelListener_option1 = new OnItemSelectedListener() {
@@ -328,7 +340,15 @@ public class WheelOptions<T> {
 
 
     //不联动情况下
+    public void setNPicker(List<T> options1Items, List<T> options2Items) {
+        setNPicker(options1Items, options2Items, null);
+    }
+
     public void setNPicker(List<T> options1Items, List<T> options2Items, List<T> options3Items) {
+        setNPicker(options1Items, options2Items, options3Items, null);
+    }
+
+    public void setNPicker(List<T> options1Items, List<T> options2Items, List<T> options3Items, List<T> options4Items) {
 
         // 选项1
         wv_option1.setAdapter(new ArrayWheelAdapter(options1Items));// 设置显示数据
@@ -343,15 +363,26 @@ public class WheelOptions<T> {
             wv_option3.setAdapter(new ArrayWheelAdapter(options3Items));// 设置显示数据
         }
         wv_option3.setCurrentItem(wv_option3.getCurrentItem());
+        // 选项4
+        if (options4Items != null) {
+            wv_option4.setAdapter(new ArrayWheelAdapter(options4Items));
+        }
+        wv_option4.setCurrentItem(wv_option4.getCurrentItem());
         wv_option1.setIsOptions(true);
         wv_option2.setIsOptions(true);
         wv_option3.setIsOptions(true);
+        wv_option4.setIsOptions(true);
 
-        if (optionsSelectChangeListener != null) {
+        if (optionsSelectChangeListener != null || fourOptionsSelectChangeListener != null) {
             wv_option1.setOnItemSelectedListener(new OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(int index) {
-                    optionsSelectChangeListener.onOptionsSelectChanged(index, wv_option2.getCurrentItem(), wv_option3.getCurrentItem());
+                    if (optionsSelectChangeListener != null) {
+                        optionsSelectChangeListener.onOptionsSelectChanged(index, wv_option2.getCurrentItem(), wv_option3.getCurrentItem());
+                    }
+                    if (fourOptionsSelectChangeListener != null) {
+                        fourOptionsSelectChangeListener.onOptionsSelectChanged(index, wv_option2.getCurrentItem(), wv_option3.getCurrentItem(), wv_option4.getCurrentItem());
+                    }
                 }
             });
         }
@@ -360,11 +391,16 @@ public class WheelOptions<T> {
             wv_option2.setVisibility(View.GONE);
         } else {
             wv_option2.setVisibility(View.VISIBLE);
-            if (optionsSelectChangeListener != null) {
+            if (optionsSelectChangeListener != null || fourOptionsSelectChangeListener != null) {
                 wv_option2.setOnItemSelectedListener(new OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(int index) {
-                        optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, wv_option3.getCurrentItem());
+                        if (optionsSelectChangeListener != null) {
+                            optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, wv_option3.getCurrentItem());
+                        }
+                        if (fourOptionsSelectChangeListener != null) {
+                            fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), index, wv_option3.getCurrentItem(), wv_option4.getCurrentItem());
+                        }
                     }
                 });
             }
@@ -373,11 +409,30 @@ public class WheelOptions<T> {
             wv_option3.setVisibility(View.GONE);
         } else {
             wv_option3.setVisibility(View.VISIBLE);
-            if (optionsSelectChangeListener != null) {
+            if (optionsSelectChangeListener != null || fourOptionsSelectChangeListener != null) {
                 wv_option3.setOnItemSelectedListener(new OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(int index) {
-                        optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), wv_option2.getCurrentItem(), index);
+                        if (optionsSelectChangeListener != null) {
+                            optionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), wv_option2.getCurrentItem(), index);
+                        }
+                        if (fourOptionsSelectChangeListener != null) {
+                            fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(), wv_option2.getCurrentItem(), index, wv_option4.getCurrentItem());
+                        }
+                    }
+                });
+            }
+        }
+        if (options4Items == null) {
+            wv_option4.setVisibility(View.GONE);
+        } else {
+            wv_option4.setVisibility(View.VISIBLE);
+            if (fourOptionsSelectChangeListener != null) {
+                wv_option4.setOnItemSelectedListener(new OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(int index) {
+                        fourOptionsSelectChangeListener.onOptionsSelectChanged(wv_option1.getCurrentItem(),
+                                wv_option2.getCurrentItem(), wv_option3.getCurrentItem(), index);
                     }
                 });
             }
